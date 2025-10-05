@@ -1,243 +1,570 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benfaddoul</title>
-    <meta name="description" content="Benfaddoul is a creative agency that specializes in branding, web design, and digital marketing.">
-    <link rel="canonical" href="https://www.Benfaddoul.com />
-    <meta property="og:title" content="Benfaddoul">
-    <meta property="og:description" content="Benfaddoul is a creative agency that specializes in branding, web design, and digital marketing.">
-    <meta property="og:image" content="https://www.Benfaddoul.com/logo.png">
-    <meta property="og:url" content="https://www.Benfaddoul.com">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Benfaddoul">
-    <meta name="twitter:description" content="Benfaddoul is a creative agency that specializes in branding, web design, and digital marketing.">
-    <meta name="twitter:image" content="https://www.Benfaddoul.com/logo.png">
-    <meta name="theme-color" content="#fb5607" />
-     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: radial-gradient(circle, #1a2a6c, #b21f1f, #fdbb2d);
-            color: white;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benfaddoul</title>
+  <meta name="description"
+    content="Benfaddoul is a creative agency that specializes in branding, web design, and digital marketing.">
+  <link rel="canonical" href="https://www.Benfaddoul.com />
+    <meta property=" og:title" content="Benfaddoul">
+  <meta property="og:description"
+    content="Benfaddoul is a creative agency that specializes in branding, web design, and digital marketing.">
+  <meta property="og:image" content="https://www.Benfaddoul.com/logo.png">
+  <meta property="og:url" content="https://www.Benfaddoul.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Benfaddoul">
+  <meta name="twitter:description"
+    content="Benfaddoul is a creative agency that specializes in branding, web design, and digital marketing.">
+  <meta name="twitter:image" content="https://www.Benfaddoul.com/logo.png">
+  <meta name="theme-color" content="#fb5607" />
+  <style>
+    :root {
+      --bg: #1e1e1e;
+      --sidebar: #252526;
+      --editor: #1e1e1e;
+      --text: #d4d4d4;
+      --muted: #858585;
+      --accent: #4ec9b0;
+      --keyword: #569cd6;
+      --string: #ce9178;
+      --comment: #6a9955;
+      --property: #9cdcfe;
+      --number: #b5cea8;
+      --enum: #4fc1ff;
+      --class: #4ec9b0;
+      --border: #3e3e42;
+      --tab-active: #1e1e1e;
+      --tab-inactive: #2d2d30;
+      --status-bar: #007acc;
+    }
 
-        #title {
-            position: absolute;
-            top: 10%;
-            font-size: 3rem;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            z-index: 10;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        #particles-js {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
+    body {
+      font-family: 'Consolas', 'Courier New', monospace;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      overflow: hidden;
+      font-size: 14px;
+      line-height: 1.6;
+    }
 
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.7);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
+    .vscode-window {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
 
-        .principal {
-            background: url('https://avatars.githubusercontent.com/u/23293093?v=4&size=200');
-            background-size: cover;
-            background-position: center;
-            box-shadow: 0 0 15px rgba(255, 99, 71, 1);
-        }
-    </style>
+    .title-bar {
+      background: var(--tab-inactive);
+      height: 35px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .control-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .close {
+      background: #ff5f57;
+    }
+
+    .minimize {
+      background: #febc2e;
+    }
+
+    .maximize {
+      background: #28c840;
+    }
+
+    .title-text {
+      color: var(--muted);
+      font-size: 12px;
+      margin-left: auto;
+    }
+
+    .tab-bar {
+      background: var(--tab-inactive);
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab {
+      background: var(--tab-active);
+      padding: 8px 16px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .tab::before {
+      content: "◈";
+      color: var(--class);
+      font-size: 16px;
+    }
+
+    .main-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    .sidebar-section {
+      margin-bottom: 20px;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .profile-img {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--editor);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .name {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--editor);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      margin: 3px 4px 3px 0;
+      color: var(--property);
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar li {
+      font-size: 12px;
+      padding: 4px 0;
+      color: var(--text);
+    }
+
+    .sidebar li::before {
+      content: "▸ ";
+      color: var(--keyword);
+      margin-right: 4px;
+    }
+
+    .sidebar a {
+      color: var(--enum);
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    .editor {
+      flex: 1;
+      background: var(--editor);
+      overflow-y: auto;
+      padding: 20px 0 20px 10px;
+    }
+
+    .code-line {
+      display: flex;
+      min-height: 19px;
+      padding: 0 20px 0 0;
+    }
+
+    .line-number {
+      width: 50px;
+      text-align: right;
+      padding-right: 20px;
+      color: var(--muted);
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .line-content {
+      flex: 1;
+      white-space: pre;
+    }
+
+    .kw {
+      color: var(--keyword);
+    }
+
+    .ty {
+      color: var(--class);
+    }
+
+    .st {
+      color: var(--string);
+    }
+
+    .cm {
+      color: var(--comment);
+    }
+
+    .pr {
+      color: var(--property);
+    }
+
+    .nu {
+      color: var(--number);
+    }
+
+    .en {
+      color: var(--enum);
+    }
+
+    .status-bar {
+      background: var(--status-bar);
+      height: 22px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 12px;
+      gap: 20px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    @media (max-width: 900px) {
+      .main-container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        max-height: 40vh;
+      }
+    }
+  </style>
+
 </head>
+
 <body>
-   
-     <div id="title">Catch Me If You Can</div>
-    <div id="particles-js"></div>
-
-    <script>
-        const numBubbles = 100; // Reduced for better performance
-        const bubbles = [];
-        const principalSize = 180; // Size of the principal bubble
-        const maxBubbleSize = 50;
-        let principalBubble;
-
-        function createBubble(isPrincipal = false) {
-            const bubble = document.createElement('div');
-            const size = isPrincipal ? principalSize : Math.random() * maxBubbleSize + 10;
-            bubble.className = 'bubble';
-            if (isPrincipal) bubble.classList.add('principal');
-
-            bubble.style.width = `${size}px`;
-            bubble.style.height = `${size}px`;
-            bubble.style.left = `${Math.random() * window.innerWidth}px`;
-            bubble.style.top = `${Math.random() * window.innerHeight}px`;
-
-            document.body.appendChild(bubble);
-
-            return {
-                element: bubble,
-                size: size,
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                dx: (Math.random() - 0.5) * 2,
-                dy: (Math.random() - 0.5) * 2,
-                isPrincipal: isPrincipal,
-            };
-        }
-
-        function updateBubbles() {
-            bubbles.forEach((bubble) => {
-                bubble.x += bubble.dx;
-                bubble.y += bubble.dy;
-
-                if (bubble.x + bubble.size < 0) {
-                    bubble.x = window.innerWidth;
-                } else if (bubble.x > window.innerWidth) {
-                    bubble.x = -bubble.size;
-                }
-
-                if (bubble.y + bubble.size < 0) {
-                    bubble.y = window.innerHeight;
-                } else if (bubble.y > window.innerHeight) {
-                    bubble.y = -bubble.size;
-                }
-
-                if (bubble.isPrincipal) {
-                    const rect = bubble.element.getBoundingClientRect();
-                    const distX = mouseX - (rect.left + rect.width / 2);
-                    const distY = mouseY - (rect.top + rect.height / 2);
-                    const distance = Math.sqrt(distX * distX + distY * distY);
-
-                    if (distance < 150) { // Make the principal bubble move faster when close
-                        const angle = Math.atan2(distY, distX);
-                        bubble.dx = -Math.cos(angle) * 5;
-                        bubble.dy = -Math.sin(angle) * 5;
-                    }
-                }
-
-                bubble.element.style.left = `${bubble.x}px`;
-                bubble.element.style.top = `${bubble.y}px`;
-            });
-
-            requestAnimationFrame(updateBubbles);
-        }
-
-        let mouseX = 0;
-        let mouseY = 0;
-        function trackMouse(ev) {
-            mouseX = ev.clientX;
-            mouseY = ev.clientY;
-        }
-
-        function checkCursor(ev) {
-            mouseX = ev.clientX;
-            mouseY = ev.clientY;
-
-            bubbles.forEach((bubble) => {
-                if (!bubble.isPrincipal) {
-                    const rect = bubble.element.getBoundingClientRect();
-                    const distX = mouseX - (rect.left + rect.width / 2);
-                    const distY = mouseY - (rect.top + rect.height / 2);
-                    const distance = Math.sqrt(distX * distX + distY * distY);
-
-                    if (distance < rect.width / 2 + 10) {
-                        const angle = Math.atan2(distY, distX);
-                        bubble.dx = -Math.cos(angle) * 3;
-                        bubble.dy = -Math.sin(angle) * 3;
-                    }
-                }
-            });
-        }
-
-        for (let i = 0; i < numBubbles - 1; i++) {
-            bubbles.push(createBubble());
-        }
-
-        // Create the principal bubble
-        principalBubble = createBubble(true);
-        bubbles.push(principalBubble);
-
-        window.addEventListener('mousemove', trackMouse);
-        window.addEventListener('mousemove', checkCursor);
-        updateBubbles();
-
-        // Initialize particles.js for additional particle effects
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 200, // Reduced to ensure smooth performance
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: "#ffffff"
-                },
-                shape: {
-                    type: "circle",
-                },
-                opacity: {
-                    value: 0.5,
-                    random: false,
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    bounce: false,
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: false,
-                    },
-                    onclick: {
-                        enable: false,
-                    },
-                },
-                modes: {
-                    repulse: {
-                        distance: 100,
-                        duration: 0.4
-                    }
-                }
-            }
-        });
-    </script>
-  
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MNL2R56DG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-7MNL2R56DG');
-    </script>
+  <div class="vscode-window">
+    <!-- Title Bar -->
+    <div class="title-bar">
+      <div class="window-controls">
+        <div class="control-btn close"></div>
+        <div class="control-btn minimize"></div>
+        <div class="control-btn maximize"></div>
+      </div>
+      <div class="title-text">Resume.cs — Houssam Benfaddoul</div>
     </div>
-   
-    <script type="application/ld+json">
+
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+      <div class="tab">Resume.cs</div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="profile-img">
+          <img src="your-photo.jpg" alt="Houssam Benfaddoul">
+        </div>
+        <div class="name">HOUSSAM BENFADDOUL</div>
+        <div class="subtitle">Full-Stack Developer<br>Building scalable digital solutions</div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-title">📧 Contacts</div>
+          <div>
+            <span class="tag">Houssam@benfaddoul.com</span>
+            <span class="tag">+212 6 61 87 37 72</span>
+            <span class="tag">Marrakech, Maroc</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-title">⚡ Technologies</div>
+          <div>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">jQuery</span>
+            <span class="tag">PHP</span>
+            <span class="tag">C#</span>
+            <span class="tag">Java</span>
+            <span class="tag">SQL</span>
+            <span class="tag">MySQL</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-title">🛠️ Frameworks & Outils</div>
+          <div>
+            <span class="tag">Laravel</span>
+            <span class="tag">ASP.NET</span>
+            <span class="tag">WordPress</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">Bootstrap</span>
+            <span class="tag">n8n</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-title">🌍 Langues</div>
+          <ul>
+            <li>Arabe — Natif</li>
+            <li>Français — Courant</li>
+            <li>Anglais — Courant</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-title">💡 Centres d'intérêt</div>
+          <ul>
+            <li>Jeux vidéo</li>
+            <li>Football</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-title">🔗 Liens</div>
+          <ul style="list-style: none;">
+            <li style="padding: 2px 0;">
+              <a href="#">GitHub</a> • <a href="#">LinkedIn</a> • <a href="#">Portfolio</a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Code Editor -->
+      <main class="editor">
+        <div class="code-line"><span class="line-number">1</span><span class="line-content"><span class="cm">///
+              &lt;summary&gt;</span></span></div>
+        <div class="code-line"><span class="line-number">2</span><span class="line-content"><span class="cm">///
+              Disponible immédiatement • Basé à Marrakech • Ouvert aux opportunités web & logiciel</span></span></div>
+        <div class="code-line"><span class="line-number">3</span><span class="line-content"><span class="cm">///
+              &lt;/summary&gt;</span></span></div>
+        <div class="code-line"><span class="line-number">4</span><span class="line-content"></span></div>
+        <div class="code-line"><span class="line-number">5</span><span class="line-content"><span
+              class="kw">public</span> <span class="kw">class</span> <span class="ty">INFORMATION</span></span></div>
+        <div class="code-line"><span class="line-number">6</span><span class="line-content">{</span></div>
+        <div class="code-line"><span class="line-number">7</span><span class="line-content"> <span
+              class="kw">public</span> <span class="kw">string</span> <span class="pr">NOM</span> = <span
+              class="st">"BENFADDOUL"</span>;</span></div>
+        <div class="code-line"><span class="line-number">8</span><span class="line-content"> <span
+              class="kw">public</span> <span class="kw">string</span> <span class="pr">PRÉNOM</span> = <span
+              class="st">"HOUSSAM"</span>;</span></div>
+        <div class="code-line"><span class="line-number">9</span><span class="line-content"> <span
+              class="kw">public</span> <span class="kw">string</span> <span class="pr">TITRE</span> = <span
+              class="st">"Full-Stack Developer | Building scalable digital solutions"</span>;</span></div>
+        <div class="code-line"><span class="line-number">10</span><span class="line-content"> <span
+              class="kw">public</span> <span class="kw">string</span> <span class="pr">EMAIL</span> = <span
+              class="st">"Houssam@benfaddoul.com"</span>;</span></div>
+        <div class="code-line"><span class="line-number">11</span><span class="line-content"> <span
+              class="kw">public</span> <span class="kw">string</span> <span class="pr">TÉLÉPHONE</span> = <span
+              class="st">"+212661873772"</span>;</span></div>
+        <div class="code-line"><span class="line-number">12</span><span class="line-content"> <span
+              class="kw">public</span> <span class="kw">string</span> <span class="pr">LOCALISATION</span> = <span
+              class="st">"Marrakech, Maroc"</span>;</span></div>
+        <div class="code-line"><span class="line-number">13</span><span class="line-content">}</span></div>
+        <div class="code-line"><span class="line-number">14</span><span class="line-content"></span></div>
+        <div class="code-line"><span class="line-number">15</span><span class="line-content"><span
+              class="kw">public</span> <span class="kw">static</span> <span class="kw">class</span> <span
+              class="ty">EXPÉRIENCE</span> <span class="cm">// récent → ancien</span></span></div>
+        <div class="code-line"><span class="line-number">16</span><span class="line-content">{</span></div>
+        <div class="code-line"><span class="line-number">17</span><span class="line-content"> <span
+              class="kw">public</span> <span class="kw">void</span> <span class="pr">Hopital_Ibn_Tofail</span>()</span>
+        </div>
+        <div class="code-line"><span class="line-number">18</span><span class="line-content"> {</span></div>
+        <div class="code-line"><span class="line-number">19</span><span class="line-content"> <span
+              class="kw">var</span> <span class="pr">Période</span> = <span class="st">"Déc. 2023 — Mars 2024 •
+              Marrakech"</span>;</span></div>
+        <div class="code-line"><span class="line-number">20</span><span class="line-content"> <span
+              class="kw">var</span> <span class="pr">Poste</span> = <span class="st">"Technicien Informatique /
+              Développeur .NET (AWRACH 2)"</span>;</span></div>
+        <div class="code-line"><span class="line-number">21</span><span class="line-content"> <span
+              class="cm">/*</span></span></div>
+        <div class="code-line"><span class="line-number">22</span><span class="line-content"><span class="cm"> *
+              Installation & maintenance (PC, imprimantes, scanners, APs)</span></span></div>
+        <div class="code-line"><span class="line-number">23</span><span class="line-content"><span class="cm"> *
+              Développement d'outils web internes (ASP.NET Core MVC)</span></span></div>
+        <div class="code-line"><span class="line-number">24</span><span class="line-content"><span class="cm">
+              */</span></span></div>
+        <div class="code-line"><span class="line-number">25</span><span class="line-content"> }</span></div>
+        <div class="code-line"><span class="line-number">26</span><span class="line-content"></span></div>
+        <div class="code-line"><span class="line-number">27</span><span class="line-content"> <span
+              class="kw">public</span> <span class="kw">void</span> <span class="pr">CA_Infos_Systeme</span>()</span>
+        </div>
+        <div class="code-line"><span class="line-number">28</span><span class="line-content"> {</span></div>
+        <div class="code-line"><span class="line-number">29</span><span class="line-content"> <span
+              class="kw">var</span> <span class="pr">Période</span> = <span class="st">"Juin 2019 — Août 2019 •
+              Marrakech"</span>;</span></div>
+        <div class="code-line"><span class="line-number">30</span><span class="line-content"> <span
+              class="kw">var</span> <span class="pr">Poste</span> = <span class="st">"Stagiaire Développeur Web
+              (WordPress)"</span>;</span></div>
+        <div class="code-line"><span class="line-number">31</span><span class="line-content"> <span class="cm">//
+              Conception & mise en ligne du site vitrine de l'entreprise</span></span></div>
+        <div class="code-line"><span class="line-number">32</span><span class="line-content"> }</span></div>
+        <div class="code-line"><span class="line-number">33</span><span class="line-content"></span></div>
+        <div class="code-line"><span class="line-number">34</span><span class="line-content"> <span
+              class="kw">public</span> <span class="kw">void</span> <span class="pr">CAP_Ingenierie</span>()</span>
+        </div>
+        <div class="code-line"><span class="line-number">35</span><span class="line-content"> {</span></div>
+        <div class="code-line"><span class="line-number">36</span><span class="line-content"> <span
+              class="kw">var</span> <span class="pr">Période</span> = <span class="st">"Mars 2016 — Juin 2016 •
+              Marrakech"</span>;</span></div>
+        <div class="code-line"><span class="line-number">37</span><span class="line-content"> <span
+              class="kw">var</span> <span class="pr">Poste</span> = <span class="st">"Stagiaire Bureau
+              d'Études"</span>;</span></div>
+        <div class="code-line"><span class="line-number">38</span><span class="line-content"> }</span></div>
+        <div class="code-line"><span class="line-number">39</span><span class="line-content">}</span></div>
+        <div class="code-line"><span class="line-number">40</span><span class="line-content"></span></div>
+        <div class="code-line"><span class="line-number">41</span><span class="line-content"><span
+              class="kw">public</span> <span class="kw">partial</span> <span class="kw">class</span> <span
+              class="ty">FORMATION</span> : <span class="ty">EcolesSuperieures</span></span></div>
+        <div class="code-line"><span class="line-number">42</span><span class="line-content">{</span></div>
+        <div class="code-line"><span class="line-number">43</span><span class="line-content"> <span
+              class="kw">private</span> <span class="kw">void</span> <span class="pr">UPM_Marrakech</span>()</span>
+        </div>
+        <div class="code-line"><span class="line-number">44</span><span class="line-content"> {</span></div>
+        <div class="code-line"><span class="line-number">45</span><span class="line-content"> <span
+              class="kw">var</span> <span class="pr">Niveau</span> = <span class="st">"Licence Informatique &
+              Réseau"</span>; <span class="cm">// 2018–2019</span></span></div>
+        <div class="code-line"><span class="line-number">46</span><span class="line-content"> }</span></div>
+        <div class="code-line"><span class="line-number">47</span><span class="line-content"></span></div>
+        <div class="code-line"><span class="line-number">48</span><span class="line-content"> <span
+              class="kw">private</span> <span class="kw">void</span> <span class="pr">OFPPT_TS_DevInfo</span>()</span>
+        </div>
+        <div class="code-line"><span class="line-number">49</span><span class="line-content"> {</span></div>
+        <div class="code-line"><span class="line-number">50</span><span class="line-content"> <span
+              class="kw">var</span> <span class="pr">Diplome</span> = <span class="st">"Technicien Spécialisé —
+              Développement Informatique"</span>; <span class="cm">// 2016–2018</span></span></div>
+        <div class="code-line"><span class="line-number">51</span><span class="line-content"> }</span></div>
+        <div class="code-line"><span class="line-number">52</span><span class="line-content"></span></div>
+        <div class="code-line"><span class="line-number">53</span><span class="line-content"> <span
+              class="kw">private</span> <span class="kw">void</span> <span
+              class="pr">OFPPT_TS_ConducteurTravaux</span>()</span></div>
+        <div class="code-line"><span class="line-number">54</span><span class="line-content"> {</span></div>
+        <div class="code-line"><span class="line-number">55</span><span class="line-content"> <span
+              class="kw">var</span> <span class="pr">Diplome</span> = <span class="st">"Technicien Spécialisé —
+              Conducteur de Travaux Public"</span>; <span class="cm">// 2013–2015</span></span></div>
+        <div class="code-line"><span class="line-number">56</span><span class="line-content"> }</span></div>
+        <div class="code-line"><span class="line-number">57</span><span class="line-content"></span></div>
+        <div class="code-line"><span class="line-number">58</span><span class="line-content"> <span
+              class="kw">private</span> <span class="kw">void</span> <span class="pr">Baccalaureat</span>()</span></div>
+        <div class="code-line"><span class="line-number">59</span><span class="line-content"> {</span></div>
+        <div class="code-line"><span class="line-number">60</span><span class="line-content"> <span
+              class="kw">var</span> <span class="pr">Serie</span> = <span class="st">"Sciences Physiques"</span>; <span
+              class="cm">// 2012–2013</span></span></div>
+        <div class="code-line"><span class="line-number">61</span><span class="line-content"> }</span></div>
+        <div class="code-line"><span class="line-number">62</span><span class="line-content">}</span></div>
+        <div class="code-line"><span class="line-number">63</span><span class="line-content"></span></div>
+        <div class="code-line"><span class="line-number">64</span><span class="line-content"><span
+              class="kw">public</span> <span class="kw">enum</span> <span class="ty">TECHNOLOGIES</span></span></div>
+        <div class="code-line"><span class="line-number">65</span><span class="line-content">{</span></div>
+        <div class="code-line"><span class="line-number">66</span><span class="line-content"> <span
+              class="en">HTML</span>, <span class="en">CSS</span>, <span class="en">TailwindCSS</span>, <span
+              class="en">Bootstrap</span>,</span></div>
+        <div class="code-line"><span class="line-number">67</span><span class="line-content"> <span
+              class="en">JavaScript</span>, <span class="en">CSharp</span>, <span class="en">Java</span></span></div>
+        <div class="code-line"><span class="line-number">68</span><span class="line-content">}</span></div>
+        <div class="code-line"><span class="line-number">69</span><span class="line-content"></span></div>
+        <div class="code-line"><span class="line-number">70</span><span class="line-content"><span
+              class="kw">public</span> <span class="kw">enum</span> <span class="ty">LANGUES</span></span></div>
+        <div class="code-line"><span class="line-number">71</span><span class="line-content">{</span></div>
+        <div class="code-line"><span class="line-number">72</span><span class="line-content"> <span
+              class="en">Arabe_Natif</span>,</span></div>
+        <div class="code-line"><span class="line-number">73</span><span class="line-content"> <span
+              class="en">Français_Courant</span>,</span></div>
+        <div class="code-line"><span class="line-number">74</span><span class="line-content"> <span
+              class="en">Anglais_Courant</span></span></div>
+        <div class="code-line"><span class="line-number">75</span><span class="line-content">}</span></div>
+      </main>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <div class="status-item">◈ C#</div>
+      <div class="status-item">UTF-8</div>
+      <div class="status-item">LF</div>
+      <div class="status-item">Ln 75, Col 1</div>
+      <div style="margin-left: auto;">Houssam Benfaddoul</div>
+    </div>
+  </div>
+
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MNL2R56DG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-7MNL2R56DG');
+  </script>
+  <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "Media agency",
@@ -257,4 +584,5 @@
         }
         </script>
 </body>
+
 </html>
